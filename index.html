@@ -1,0 +1,36 @@
+<html>
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    </head>
+    <body class="container-sm">
+    <h2>Demonstration of Problem</h2>
+    <p><span style="font-size: 15px;"><strong> Question:- </strong>Tortoise is crawling on cartesian plane, it's path is described by array of integers [1, 3, 5, 2, 6, 2, …], after each segment tortoise turns on 90 degrees clockwise. Find when the turtle crosses its own path and return the segment number? </span></p>
+    <input id="input" class="form-control mb-2" type="text" placeholder="For Path Enter number seperated by comma eg. 1,2,3" style="width: 400px;">
+    <button class="btn btn-success mb-2" onclick="getIntersection()"> Find Intersection </button>
+    <div class="m-1 mt-2"><h3 id="ans">Your Answer</h3></div>
+    </body>
+<script src="index.js"></script>
+<script>
+    function getIntersection(){
+        let input = document.getElementById("input").value;
+        let output = document.getElementById("ans");
+        let a = new Array();
+        try {
+            while(input.indexOf(',')>0){
+            temp = parseInt(input.slice(0,input.indexOf(',')));
+            if(!isNaN(temp)){a.push(temp);}else{break;}
+            input = input.substr(input.indexOf(',')+1,input.lenth);
+        }
+        if(isNaN(parseInt(input))){throw "Please Enter number seprated by comma only Or remove unwanted comma.";}
+        else{a.push(parseInt(input))}
+
+        output.style.color = "black";
+        findIntersection(a).then(data=> output.innerHTML = data?
+        `The Tortoise will Cross his own path at point (x,y) => (${X},${Y}) while Completing the segment number ${data+1}.`:
+        `The Tortoise will never cross his own path.`);
+
+        } catch (error) {output.style.color = "red";output.innerHTML = error;}
+    }
+</script>
+</html>
